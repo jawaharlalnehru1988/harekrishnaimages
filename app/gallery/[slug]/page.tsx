@@ -65,8 +65,33 @@ export default function GalleryPage({ params }: { params: Promise<{ slug: string
             window.URL.revokeObjectURL(url);
         } catch (error) {
             console.error('Download failed:', error);
-            // Fallback: Open in new tab if download fails
             window.open(imageUrl, '_blank');
+        }
+    };
+
+    const handleShare = async (imageUrl: string, note: string) => {
+        const shareData = {
+            title: 'Hare Krishna Images Gallery',
+            text: note || 'Check out this beautiful transcendental image!',
+            url: window.location.href,
+        };
+
+        if (navigator.share) {
+            try {
+                // If the browser supports file sharing, we could try to share the image itself
+                // But for simplicity and broad support, we share the text and link
+                await navigator.share(shareData);
+            } catch (error) {
+                console.error('Error sharing:', error);
+            }
+        } else {
+            // Fallback for desktop/unsupported browsers: Copy link to clipboard
+            try {
+                await navigator.clipboard.writeText(`${shareData.text}\n${shareData.url}`);
+                alert('Link copied to clipboard!');
+            } catch (err) {
+                console.error('Fallback sharing failed:', err);
+            }
         }
     };
 
@@ -180,9 +205,9 @@ export default function GalleryPage({ params }: { params: Promise<{ slug: string
                                             fill
                                             className="object-cover transition-transform duration-700 group-hover:scale-105"
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
 
-                                        <div className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-all translate-x-4 group-hover:translate-x-0">
+                                        {/* Desktop Overlay Action Buttons (Hover) */}
+                                        <div className="absolute top-4 right-4 hidden md:flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-all translate-x-4 group-hover:translate-x-0">
                                             <button
                                                 onClick={() => handleDownload(image.Image, image.note)}
                                                 className="bg-white/90 backdrop-blur text-slate-900 p-2.5 rounded-full shadow-xl hover:bg-primary hover:text-white transition-all duration-300"
@@ -190,21 +215,43 @@ export default function GalleryPage({ params }: { params: Promise<{ slug: string
                                             >
                                                 <span className="material-symbols-outlined text-xl">download</span>
                                             </button>
-                                            <button className="bg-white/90 backdrop-blur text-slate-900 p-2.5 rounded-full shadow-xl hover:bg-primary hover:text-white transition-all duration-300">
+                                            <button
+                                                onClick={() => handleShare(image.Image, image.note)}
+                                                className="bg-white/90 backdrop-blur text-slate-900 p-2.5 rounded-full shadow-xl hover:bg-primary hover:text-white transition-all duration-300"
+                                                title="Share Image"
+                                            >
                                                 <span className="material-symbols-outlined text-xl">share</span>
                                             </button>
                                         </div>
                                     </div>
-                                    <div className="p-5">
-                                        <p className="text-sm font-bold text-slate-900 dark:text-white line-clamp-2 min-h-[2.5rem] leading-relaxed">
-                                            {image.note}
-                                        </p>
-                                        <div className="flex justify-between items-center mt-4 pt-4 border-t border-slate-100 dark:border-slate-700">
-                                            <span className="px-2 py-0.5 bg-saffron/10 text-saffron rounded text-[10px] font-bold uppercase tracking-wider">
-                                                Darshan
-                                            </span>
-                                            <span className="text-[10px] text-slate-400 dark:text-slate-500 font-medium">
-                                                ID: #{image.id}
+
+                                    <div className="p-5 flex flex-col justify-between flex-grow">
+                                        <div>
+                                            <p className="text-sm font-bold text-slate-900 dark:text-white line-clamp-2 leading-relaxed mb-4">
+                                                {image.note}
+                                            </p>
+                                        </div>
+
+                                        {/* Actions Footer */}
+                                        <div className="pt-4 border-t border-slate-100 dark:border-slate-700 flex justify-between items-center">
+                                            <div className="flex gap-4">
+                                                <button
+                                                    onClick={() => handleDownload(image.Image, image.note)}
+                                                    className="flex items-center gap-1.5 text-xs font-bold text-primary hover:text-primary/80 transition-colors uppercase tracking-wider"
+                                                >
+                                                    <span className="material-symbols-outlined text-lg">download</span>
+                                                    <span>Save</span>
+                                                </button>
+                                                <button
+                                                    onClick={() => handleShare(image.Image, image.note)}
+                                                    className="flex items-center gap-1.5 text-xs font-bold text-slate-600 dark:text-slate-400 hover:text-primary transition-colors uppercase tracking-wider"
+                                                >
+                                                    <span className="material-symbols-outlined text-lg">share</span>
+                                                    <span>Share</span>
+                                                </button>
+                                            </div>
+                                            <span className="text-[10px] text-gold uppercase font-bold tracking-widest bg-gold/5 px-2 py-1 rounded">
+                                                Images
                                             </span>
                                         </div>
                                     </div>

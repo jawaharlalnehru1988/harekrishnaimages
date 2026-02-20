@@ -3,40 +3,47 @@ import React from 'react';
 
 export default function Navbar() {
     return (
-        <header className="sticky top-0 z-50 w-full border-b border-gold/20 bg-background-light/95 backdrop-blur supports-[backdrop-filter]:bg-background-light/60 dark:bg-background-dark/95">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex h-20 items-center justify-between">
+        <header className="sticky top-2 z-50 w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+            <div className="rounded-full border border-gold/20 bg-background-light/80 backdrop-blur-lg supports-[backdrop-filter]:bg-background-light/40 dark:bg-background-dark/80 px-6 sm:px-10 py-3 shadow-xl">
+                <div className="flex h-12 items-center justify-between">
                     {/* Logo */}
-                    <div className="flex items-center gap-3">
-                        <div className="text-saffron">
-                            <span className="material-symbols-outlined text-4xl">temple_hindu</span>
+                    <Link href="/" className="flex items-center gap-3 group">
+                        <div className="text-saffron transition-transform group-hover:scale-110 duration-300">
+                            <span className="material-symbols-outlined text-3xl sm:text-4xl">temple_hindu</span>
                         </div>
-                        <div>
-                            <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Hare Krishna Images Gallery</h1>
+                        <div className="hidden xs:block">
+                            <h1 className="text-lg sm:text-xl font-bold tracking-tight text-slate-900 dark:text-white leading-none">Hare Krishna Images Gallery</h1>
                             <p className="text-[10px] uppercase tracking-[0.2em] text-gold font-bold">Transcendental Art</p>
                         </div>
-                    </div>
+                    </Link>
+
                     {/* Nav Links */}
-                    <nav className="hidden md:flex items-center gap-8">
-                        <Link href="#" className="text-sm font-medium text-primary border-b-2 border-primary pb-1">Home</Link>
-                        <Link href="#" className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">About</Link>
-                        <Link href="#" className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Contact</Link>
+                    <nav className="hidden md:flex items-center gap-10">
+                        <Link href="/" className="text-sm font-bold text-slate-600 hover:text-primary transition-all relative group py-2">
+                            Home
+                            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                        </Link>
+                        <Link href="/about" className="text-sm font-bold text-slate-600 hover:text-primary transition-all relative group py-2">
+                            About
+                            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                        </Link>
+                        <Link href="/contact" className="text-sm font-bold text-slate-600 hover:text-primary transition-all relative group py-2">
+                            Contact
+                            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                        </Link>
                     </nav>
+
                     {/* Search & Actions */}
-                    <div className="flex items-center gap-4">
-                        <div className="relative hidden sm:block">
-                            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
-                            <input
-                                className="w-64 rounded-full border-gold/30 bg-white/50 py-2 pl-10 pr-4 text-sm focus:border-primary focus:ring-primary dark:bg-slate-800"
-                                placeholder="Search pastimes..."
-                                type="text"
-                            />
-                        </div>
-                        <button className="p-2 text-slate-600 hover:text-primary md:hidden">
+                    <div className="flex items-center gap-6">
+                        <button className="p-2 text-slate-600 hover:text-primary transition-colors">
                             <span className="material-symbols-outlined">search</span>
                         </button>
-                        <button className="rounded-full bg-primary px-6 py-2.5 text-sm font-bold text-white shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">
+                        <button className="hidden sm:block rounded-full bg-primary px-8 py-2.5 text-sm font-bold text-white shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
                             Donate
+                        </button>
+                        {/* Mobile Menu Toggle (Simplified) */}
+                        <button className="md:hidden p-2 text-slate-600">
+                            <span className="material-symbols-outlined">menu</span>
                         </button>
                     </div>
                 </div>

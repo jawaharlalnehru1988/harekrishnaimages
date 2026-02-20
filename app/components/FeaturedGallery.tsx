@@ -41,7 +41,11 @@ export default async function FeaturedGallery() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {categories.map((category) => (
-                    <div key={category.id} className="group relative overflow-hidden rounded-xl bg-slate-100 shadow-xl transition-all hover:-translate-y-2">
+                    <Link
+                        key={category.id}
+                        href={`/gallery/${category.routerPath}`}
+                        className="group relative overflow-hidden rounded-xl bg-slate-100 shadow-xl transition-all hover:-translate-y-2 cursor-pointer block h-full"
+                    >
                         <div className="aspect-[4/5] overflow-hidden relative h-full">
                             <Image
                                 src={category.categoryImage}
@@ -51,13 +55,13 @@ export default async function FeaturedGallery() {
                             />
                         </div>
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8 text-white">
-                            <h3 className="text-2xl font-bold mb-2">{category.categoryName}</h3>
+                            <h3 className="text-2xl font-bold mb-2 transition-colors group-hover:text-gold">{category.categoryName}</h3>
                             <p className="text-sm opacity-80 mb-4 line-clamp-2">{category.categoryDescription}</p>
-                            <Link href={`/gallery/${category.routerPath}`}>
-                                <button className="w-fit rounded-lg bg-gold px-4 py-2 text-xs font-bold uppercase tracking-wider text-white hover:bg-gold/80">View Collection</button>
-                            </Link>
+                            <span className="w-fit rounded-lg bg-gold px-4 py-2 text-xs font-bold uppercase tracking-wider text-white group-hover:bg-gold/80 transition-all shadow-lg group-hover:shadow-gold/20">
+                                View Collection
+                            </span>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
         </section>

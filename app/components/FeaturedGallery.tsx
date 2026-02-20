@@ -53,7 +53,7 @@ export default async function FeaturedGallery() {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8 text-white">
                             <h3 className="text-2xl font-bold mb-2">{category.categoryName}</h3>
                             <p className="text-sm opacity-80 mb-4 line-clamp-2">{category.categoryDescription}</p>
-                            <Link href={`/${category.routerPath}`}>
+                            <Link href={`/gallery/${category.routerPath}`}>
                                 <button className="w-fit rounded-lg bg-gold px-4 py-2 text-xs font-bold uppercase tracking-wider text-white hover:bg-gold/80">View Collection</button>
                             </Link>
                         </div>

@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 
 const slides = [
     {
-        image: '/bhagavadgita.png',
+        image: '/bhagavadgita.jpg',
         tag: 'Eternal Wisdom',
         title: 'The Song of God',
         description: 'Discover the timeless teachings of Lord Krishna on the battlefield of Kurukshetra.',

@@ -12,15 +12,13 @@ export default function Navbar() {
                             <span className="material-symbols-outlined text-4xl">temple_hindu</span>
                         </div>
                         <div>
-                            <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Hare Krishna Gallery</h1>
+                            <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Hare Krishna Images Gallery</h1>
                             <p className="text-[10px] uppercase tracking-[0.2em] text-gold font-bold">Transcendental Art</p>
                         </div>
                     </div>
                     {/* Nav Links */}
                     <nav className="hidden md:flex items-center gap-8">
                         <Link href="#" className="text-sm font-medium text-primary border-b-2 border-primary pb-1">Home</Link>
-                        <Link href="#" className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Gallery</Link>
-                        <Link href="#" className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Books</Link>
                         <Link href="#" className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">About</Link>
                         <Link href="#" className="text-sm font-medium text-slate-600 hover:text-primary transition-colors">Contact</Link>
                     </nav>
